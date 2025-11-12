@@ -33,7 +33,7 @@
 ## 鉴权设计
 
 - 谁都可以发布留言，不用登录
-- 要回复或者删除留言。需要登录管理员账号（admin 123456）
+- 要回复或者删除留言。需要登录管理员账号,默认是：admin / 123456。可以后端设置
 
 
 
@@ -49,7 +49,7 @@
 | --------- | ------- | ---- | ------------------------------------- |
 | `page`    | int     | 否   | 页码，默认 1                          |
 | `limit`   | int     | 否   | 每页数量，默认 10                     |
-| `keyword` | string  | 否   | 搜索关键词（匹配昵称或内容）          |
+| `keyword` | string  | 否   | 搜索关键词（匹配内容/标题/昵称）      |
 | `sort`    | string  | 否   | 排序方式：`newest`（默认）或 `oldest` |
 | `replied` | boolean | 否   | 是否筛选已回复留言（true / false）    |
 
@@ -68,10 +68,11 @@
         "id": 101,
         "nickname": "Luna",
         "email": "example@mail.com",
+        "title":"留言标题",
         "content": "留言内容",
         "reply": "管理员回复内容",
         "createdAt": "2025-11-12 08:20:00",
-        "repliedAt": "2025-11-12 09:00:00"
+        "updatedAt": "2025-11-12 09:00:00"
       }
     ]
   }
@@ -102,6 +103,7 @@
     "id": 101,
     "nickname": "Luna",
     "email": "example@mail.com",
+    "title":"留言标题",
     "content": "留言内容",
     "reply": "管理员回复内容",
     "createdAt": "2025-11-12 08:20:00"
@@ -119,9 +121,19 @@
 
 ### 请求体(Request body)
 
+| 参数名   | 类型   | 必填 | 说明                       |
+| -------- | ------ | ---- | -------------------------- |
+| nickname | string | 是   | 留言者昵称                 |
+| title    | string | 否   | 留言标题                   |
+| email    | string | 否   | 留言者邮箱，可用于回复通知 |
+| content  | string | 是   | 留言内容                   |
+
+如果你希望，我可以顺便帮你把 **完整接口请求参数表格**（含分页、回复、管理员登录等）都整理成统一格式，方便直接放进文档里。你需要吗？
+
 ```json
 {
   "nickname": "Luna",
+  "title":"留言标题",
   "email": "example@mail.com",
   "content": "留言的内容"
 }
@@ -168,6 +180,10 @@ Authorization:<token>
 ```
 
 ### 请求体(Request body)
+
+| 参数名 | 类型   | 必填 | 说明                   |
+| ------ | ------ | ---- | ---------------------- |
+| reply  | string | 是   | 管理员对留言的回复内容 |
 
 ```json
 {
@@ -248,6 +264,11 @@ Authorization:<token>
 `POST /api/admin/login`
 
 ### 请求体
+
+| 参数名   | 类型   | 必填 | 说明       |
+| -------- | ------ | ---- | ---------- |
+| username | string | 是   | 管理员账号 |
+| password | string | 是   | 管理员密码 |
 
 ```json
 {
