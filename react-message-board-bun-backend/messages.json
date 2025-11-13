@@ -5,15 +5,11 @@
     "title": "titl1",
     "email": "example@mail.com",
     "content": "content1",
-    "createdAt": "2025-11-12 15:11:05"
-  },
-  {
-    "id": 1763008644183,
-    "nickname": "Alice",
-    "title": "关于网站外观",
-    "email": "alice@example.com",
-    "content": "整体设计很清爽，但希望能加个暗黑模式。",
-    "createdAt": "2025-11-13 04:37:24"
+    "createdAt": "2025-11-12 15:11:05",
+    "reply": [
+      "收到您的建议，管理员1",
+      "收到您的建议，管理员2"
+    ]
   },
   {
     "id": 1763008650660,
@@ -30,14 +26,6 @@
     "email": "charlie_dev@outlook.com",
     "content": "留言板的配色挺舒服，建议表单也保持统一风格。",
     "createdAt": "2025-11-13 04:37:35"
-  },
-  {
-    "id": 1763008659381,
-    "nickname": "Diana",
-    "title": "功能请求",
-    "email": "diana888@gmail.com",
-    "content": "希望能支持Markdown语法输入内容。",
-    "createdAt": "2025-11-13 04:37:39"
   },
   {
     "id": 1763008662924,

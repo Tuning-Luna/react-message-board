@@ -70,7 +70,7 @@
         "email": "example@mail.com",
         "title":"留言标题",
         "content": "留言内容",
-        "reply": "管理员回复内容",
+        "reply": ["管理员回复内容1","管理员回复内容2"],
         "createdAt": "2025-11-12 08:20:00"
       }
     ]
@@ -104,7 +104,7 @@
     "email": "example@mail.com",
     "title":"留言标题",
     "content": "留言内容",
-    "reply": "管理员回复内容",
+    "reply": ["管理员回复内容1","管理员回复内容2"],
     "createdAt": "2025-11-12 08:20:00"
   }
 }
@@ -193,10 +193,7 @@ Authorization:<token>
 ```json
 {
   "code": 1,
-  "msg": "回复成功",
-  "data": {
-    "id": 101,
-  }
+  "msg": "回复成功"
 }
 ```
 

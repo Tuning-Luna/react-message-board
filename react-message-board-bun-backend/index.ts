@@ -24,7 +24,7 @@ interface Message {
   title: string
   email?: string
   content: string
-  reply?: string
+  reply?: string[]
   createdAt: string
 }
 
@@ -134,10 +134,14 @@ router.post("/messages/:id/reply", (req, res) => {
   const msg = db.find((m) => m.id === Number(req.params.id))
   if (!msg) return res.send(error("留言不存在"))
 
-  msg.reply = reply
+  if (!msg.reply) {
+    msg.reply = []
+  }
+  msg.reply.push(reply)
+
   writeDB(db)
 
-  res.send(ok({ id: msg.id }, "回复成功"))
+  res.send(ok(null, "回复成功"))
 })
 
 // 5. 删除留言
@@ -157,16 +161,11 @@ router.delete("/messages/:id", (req, res) => {
 // 6. 管理员登录
 router.post("/admin/login", (req, res) => {
   const { username, password } = req.body
-  if (username === "admin" && password === "123456") {
+  if (username === "admin" && password == "123456") {
     res.send(ok({ token: ADMIN_TOKEN }, "登录成功"))
   } else {
     res.send(error("账号或密码错误"))
   }
-})
-
-// 测试接口
-router.get("/", (req, res) => {
-  res.send(ok("test"))
 })
 
 // 注册 /api 路由前缀
