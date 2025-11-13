@@ -6,6 +6,7 @@
     "email": "example@mail.com",
     "content": "content1",
     "createdAt": "2025-11-12 15:11:05",
+    "likes": 5,
     "reply": [
       "收到您的建议，管理员1",
       "收到您的建议，管理员2"
@@ -17,7 +18,8 @@
     "title": "加载速度反馈",
     "email": "bob123@mail.net",
     "content": "页面打开稍慢，图片资源能否压缩一下？",
-    "createdAt": "2025-11-13 04:37:30"
+    "createdAt": "2025-11-13 04:37:30",
+    "likes": 3
   },
   {
     "id": 1763008655379,
@@ -25,7 +27,8 @@
     "title": "UI风格建议",
     "email": "charlie_dev@outlook.com",
     "content": "留言板的配色挺舒服，建议表单也保持统一风格。",
-    "createdAt": "2025-11-13 04:37:35"
+    "createdAt": "2025-11-13 04:37:35",
+    "likes": 1
   },
   {
     "id": 1763008662924,
@@ -33,7 +36,8 @@
     "title": "国际化支持",
     "email": "george_ai@mail.com",
     "content": "希望能提供英文界面选项。",
-    "createdAt": "2025-11-13 04:37:42"
+    "createdAt": "2025-11-13 04:37:42",
+    "likes": 0
   },
   {
     "id": 1763008667318,
@@ -41,6 +45,7 @@
     "title": "视觉优化",
     "email": "judy_user@icloud.com",
     "content": "字体稍显小，可以整体放大一点。",
-    "createdAt": "2025-11-13 04:37:47"
+    "createdAt": "2025-11-13 04:37:47",
+    "likes": 10
   }
 ]

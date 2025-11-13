@@ -24,6 +24,7 @@ interface Message {
   title: string
   email?: string
   content: string
+  likes: number
   reply?: string[]
   createdAt: string
 }
@@ -117,6 +118,7 @@ router.post("/messages", (req, res) => {
     title,
     email,
     content,
+    likes: 0,
     createdAt: now,
   }
   db.push(newMsg)
@@ -124,7 +126,17 @@ router.post("/messages", (req, res) => {
   res.send(ok({ id: newMsg.id, createdAt: now }, "留言成功"))
 })
 
-// 4.管理员回复留言
+// 4.点赞留言
+router.post("/messages/:id/like", (req, res) => {
+  const db = readDB()
+  const msg = db.find((m) => m.id === Number(req.params.id))
+  if (!msg) return res.send(error("留言不存在"))
+  ++msg.likes
+  writeDB(db)
+  res.send(ok(null, "点赞成功"))
+})
+
+// 5.管理员回复留言
 router.post("/messages/:id/reply", (req, res) => {
   const token = req.headers.authorization
   if (token !== ADMIN_TOKEN) return res.send(error("未登录或权限不足"))
@@ -144,7 +156,7 @@ router.post("/messages/:id/reply", (req, res) => {
   res.send(ok(null, "回复成功"))
 })
 
-// 5. 删除留言
+// 6. 删除留言
 router.delete("/messages/:id", (req, res) => {
   const token = req.headers.authorization
   if (token !== ADMIN_TOKEN) return res.send(error("未登录或权限不足"))
@@ -158,7 +170,7 @@ router.delete("/messages/:id", (req, res) => {
   res.send(ok(null, "删除成功"))
 })
 
-// 6. 管理员登录
+// 7. 管理员登录
 router.post("/admin/login", (req, res) => {
   const { username, password } = req.body
   if (username === "admin" && password == "123456") {
