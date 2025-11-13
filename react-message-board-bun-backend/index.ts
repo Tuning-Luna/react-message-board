@@ -21,13 +21,11 @@ const DB_PATH = path.resolve("./messages.json")
 interface Message {
   id: number
   nickname: string
-  title?: string
+  title: string
   email?: string
   content: string
   reply?: string
   createdAt: string
-  updatedAt?: string
-  repliedAt?: string
 }
 
 type DB = Message[]
@@ -35,7 +33,7 @@ type DB = Message[]
 // 读写 JSON 文件
 function readDB(): DB {
   if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify({ messages: [] }, null, 2))
+    fs.writeFileSync(DB_PATH, JSON.stringify([], null, 2))
   }
   return JSON.parse(fs.readFileSync(DB_PATH, "utf8")) as DB
 }
@@ -54,7 +52,7 @@ const router = express.Router()
 router.get("/messages", (req, res) => {
   const {
     page = "1",
-    limit = "10",
+    pageSize = "10",
     keyword = "",
     sort = "newest",
     replied,
@@ -63,8 +61,8 @@ router.get("/messages", (req, res) => {
   let list = db
 
   // 模糊查询
-  if (keyword) {
-    const kw = (keyword as string).toLowerCase()
+  const kw = (keyword as string).trim().toLowerCase()
+  if (kw) {
     list = list.filter(
       (m) =>
         m.nickname.toLowerCase().includes(kw) ||
@@ -84,11 +82,11 @@ router.get("/messages", (req, res) => {
 
   // 分页
   const p = parseInt(page as string)
-  const l = parseInt(limit as string)
+  const l = parseInt(pageSize as string)
   const total = list.length
   const sliced = list.slice((p - 1) * l, p * l)
 
-  res.send(ok({ total, page: p, limit: l, list: sliced }, "查询成功"))
+  res.send(ok({ total: total, page: p, pageSize: l, list: sliced }, "查询成功"))
 })
 
 // 2. 根据 ID 查询留言详情
@@ -102,8 +100,10 @@ router.get("/messages/:id", (req, res) => {
 // 3. 发布留言
 router.post("/messages", (req, res) => {
   const { nickname, title, email, content } = req.body
-  if (!nickname || !content || !title)
-    return res.send(error("昵称,内容和标题必填"))
+
+  if (!nickname) return res.send(error("昵称必填"))
+  if (!content) return res.send(error("内容必填"))
+  if (!title) return res.send(error("标题必填"))
 
   // 验证邮箱
   if (email && !/^[\w.-]+@[\w.-]+\.\w+$/.test(email))
@@ -119,7 +119,6 @@ router.post("/messages", (req, res) => {
     content,
     createdAt: now,
   }
-  // 类型“DB”上不存在属性“push”。ts(2339)
   db.push(newMsg)
   writeDB(db)
   res.send(ok({ id: newMsg.id, createdAt: now }, "留言成功"))
@@ -136,11 +135,9 @@ router.post("/messages/:id/reply", (req, res) => {
   if (!msg) return res.send(error("留言不存在"))
 
   msg.reply = reply
-  msg.repliedAt = new Date().toISOString().replace("T", " ").substring(0, 19)
-  msg.updatedAt = msg.repliedAt
   writeDB(db)
 
-  res.send(ok({ id: msg.id, repliedAt: msg.repliedAt }, "回复成功"))
+  res.send(ok({ id: msg.id }, "回复成功"))
 })
 
 // 5. 删除留言
@@ -177,7 +174,7 @@ app.use("/api", router)
 
 // 全局 404 兜底
 app.use((req, res) => {
-  res.status(404).send(error("Not found"))
+  res.status(404).send("<h1 align='center'>404 Not Found</h1>")
 })
 
 // 启动服务器

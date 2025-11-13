@@ -6,5 +6,53 @@
     "email": "example@mail.com",
     "content": "content1",
     "createdAt": "2025-11-12 15:11:05"
+  },
+  {
+    "id": 1763008644183,
+    "nickname": "Alice",
+    "title": "关于网站外观",
+    "email": "alice@example.com",
+    "content": "整体设计很清爽，但希望能加个暗黑模式。",
+    "createdAt": "2025-11-13 04:37:24"
+  },
+  {
+    "id": 1763008650660,
+    "nickname": "Bob",
+    "title": "加载速度反馈",
+    "email": "bob123@mail.net",
+    "content": "页面打开稍慢，图片资源能否压缩一下？",
+    "createdAt": "2025-11-13 04:37:30"
+  },
+  {
+    "id": 1763008655379,
+    "nickname": "Charlie",
+    "title": "UI风格建议",
+    "email": "charlie_dev@outlook.com",
+    "content": "留言板的配色挺舒服，建议表单也保持统一风格。",
+    "createdAt": "2025-11-13 04:37:35"
+  },
+  {
+    "id": 1763008659381,
+    "nickname": "Diana",
+    "title": "功能请求",
+    "email": "diana888@gmail.com",
+    "content": "希望能支持Markdown语法输入内容。",
+    "createdAt": "2025-11-13 04:37:39"
+  },
+  {
+    "id": 1763008662924,
+    "nickname": "George",
+    "title": "国际化支持",
+    "email": "george_ai@mail.com",
+    "content": "希望能提供英文界面选项。",
+    "createdAt": "2025-11-13 04:37:42"
+  },
+  {
+    "id": 1763008667318,
+    "nickname": "Judy",
+    "title": "视觉优化",
+    "email": "judy_user@icloud.com",
+    "content": "字体稍显小，可以整体放大一点。",
+    "createdAt": "2025-11-13 04:37:47"
   }
 ]
