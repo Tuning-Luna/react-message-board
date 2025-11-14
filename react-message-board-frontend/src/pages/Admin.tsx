@@ -1,57 +1,50 @@
-import { useState } from "react"
-import { Card, Button, Label, TextInput, Textarea, Alert } from "flowbite-react"
+import { useState, useMemo, useEffect } from "react"
+import {
+  Card,
+  Button,
+  Label,
+  TextInput,
+  Textarea,
+  Alert,
+  Pagination,
+} from "flowbite-react"
+import { useMessages } from "../App"
 
-interface Message {
-  id: number
-  title: string
-  content: string
-  nickname: string
-  time: string
-  likes: number
-  adminReply?: string
-}
-
-const mockMessages: Message[] = [
-  {
-    id: 1,
-    title: "你好！",
-    content: "这是第一条留言",
-    nickname: "Alice",
-    time: "2025-11-14 09:00",
-    likes: 10,
-    adminReply: "谢谢你的留言！",
-  },
-  {
-    id: 2,
-    title: "测试留言",
-    content: "这是第二条留言",
-    nickname: "Bob",
-    time: "2025-11-14 09:30",
-    likes: 5,
-  },
-  {
-    id: 3,
-    title: "问题反馈",
-    content: "请问什么时候能回复？",
-    nickname: "Charlie",
-    time: "2025-11-14 10:15",
-    likes: 3,
-  },
-]
+const TOKEN_KEY = "admin_token"
+const ITEMS_PER_PAGE = 5
 
 export default function Admin() {
-  const [token, setToken] = useState<string | null>(null)
+  const { messages, deleteMessage, addReply } = useMessages()
+  const [token, setToken] = useState<string | null>(() => {
+    // 初始化时从 localStorage 读取 token
+    return localStorage.getItem(TOKEN_KEY)
+  })
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [loginError, setLoginError] = useState("")
-
-  const [messages, setMessages] = useState<Message[]>(mockMessages)
   const [replyDrafts, setReplyDrafts] = useState<Record<number, string>>({})
   const [actionNotice, setActionNotice] = useState<{
     type: "success" | "failure"
     message: string
   } | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  // 计算分页数据
+  const paginatedMessages = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+    const endIndex = startIndex + ITEMS_PER_PAGE
+    return messages.slice(startIndex, endIndex)
+  }, [messages, currentPage])
+
+  const totalPages = Math.ceil(messages.length / ITEMS_PER_PAGE)
+
+  // 当消息数量变化时，如果当前页超出范围，重置到第一页
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1)
+    }
+  }, [totalPages, currentPage])
 
   const notify = (type: "success" | "failure", message: string) => {
     setActionNotice({ type, message })
@@ -73,7 +66,10 @@ export default function Admin() {
       await new Promise((resolve) => setTimeout(resolve, 800))
 
       if (username === "admin" && password === "123456") {
-        setToken("mock-token-123")
+        const newToken = "mock-token-123"
+        setToken(newToken)
+        // 保存 token 到 localStorage
+        localStorage.setItem(TOKEN_KEY, newToken)
         notify("success", "登录成功，已获取管理员权限")
       } else {
         setLoginError("用户名或密码错误")
@@ -91,6 +87,8 @@ export default function Admin() {
     setUsername("")
     setPassword("")
     setReplyDrafts({})
+    // 清除 localStorage 中的 token
+    localStorage.removeItem(TOKEN_KEY)
     notify("success", "已退出管理员登录")
   }
 
@@ -105,16 +103,18 @@ export default function Admin() {
       return
     }
 
-    setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === id ? { ...msg, adminReply: draft.trim() } : msg,
-      ),
-    )
+    addReply(id, draft.trim())
+    // 清空草稿
+    setReplyDrafts((prev) => {
+      const updated = { ...prev }
+      delete updated[id]
+      return updated
+    })
     notify("success", "回复已保存")
   }
 
   const handleDelete = (id: number) => {
-    setMessages((prev) => prev.filter((msg) => msg.id !== id))
+    deleteMessage(id)
     setReplyDrafts((prev) => {
       const updated = { ...prev }
       delete updated[id]
@@ -209,69 +209,88 @@ export default function Admin() {
             </p>
           </Card>
         ) : (
-          <div className="space-y-4">
-            {messages.map((msg) => {
-              const draft = replyDrafts[msg.id] ?? msg.adminReply ?? ""
-              return (
-                <Card key={msg.id}>
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold">{msg.title}</h3>
-                      <p className="text-sm text-gray-500">
-                        来自 {msg.nickname} · {msg.time}
-                      </p>
-                    </div>
-                    <Button
-                      color="failure"
-                      onClick={() => handleDelete(msg.id)}
-                    >
-                      删除
-                    </Button>
-                  </div>
-
-                  <p className="mt-3 text-gray-700">{msg.content}</p>
-
-                  {msg.adminReply && (
-                    <div className="mt-3 rounded border-l-4 border-blue-600 bg-blue-50 p-3 text-sm text-blue-700">
-                      <span className="font-semibold">已发布回复：</span>
-                      {msg.adminReply}
-                    </div>
-                  )}
-
-                  <div className="mt-4 space-y-2">
-                    <Label htmlFor={`reply-${msg.id}`} className="font-medium">
-                      管理员回复
-                    </Label>
-                    <Textarea
-                      id={`reply-${msg.id}`}
-                      rows={4}
-                      placeholder="输入或编辑管理员回复内容"
-                      value={draft}
-                      onChange={(e) =>
-                        handleReplyChange(msg.id, e.target.value)
-                      }
-                    />
-                    <div className="flex flex-wrap gap-3">
-                      <Button onClick={() => handleSaveReply(msg.id)}>
-                        保存回复
-                      </Button>
+          <>
+            <div className="space-y-4">
+              {paginatedMessages.map((msg) => {
+                const draft = replyDrafts[msg.id] ?? ""
+                return (
+                  <Card key={msg.id}>
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <h3 className="text-xl font-semibold">{msg.title}</h3>
+                        <p className="text-sm text-gray-500">
+                          来自 {msg.nickname} · {msg.createdAt}
+                        </p>
+                      </div>
                       <Button
-                        color="light"
-                        onClick={() =>
-                          handleReplyChange(
-                            msg.id,
-                            msg.adminReply ? msg.adminReply : "",
-                          )
-                        }
+                        color="failure"
+                        onClick={() => handleDelete(msg.id)}
                       >
-                        重置
+                        删除
                       </Button>
                     </div>
-                  </div>
-                </Card>
-              )
-            })}
-          </div>
+
+                    <p className="mt-3 text-gray-700">{msg.content}</p>
+
+                    {msg.reply && msg.reply.length > 0 && (
+                      <div className="mt-3 space-y-2">
+                        {msg.reply.map((replyText, idx) => (
+                          <div
+                            key={idx}
+                            className="rounded border-l-4 border-blue-600 bg-blue-50 p-3 text-sm text-blue-700"
+                          >
+                            <span className="font-semibold">已发布回复：</span>
+                            {replyText}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="mt-4 space-y-2">
+                      <Label
+                        htmlFor={`reply-${msg.id}`}
+                        className="font-medium"
+                      >
+                        管理员回复
+                      </Label>
+                      <Textarea
+                        id={`reply-${msg.id}`}
+                        rows={4}
+                        placeholder="输入新的管理员回复内容（将追加到现有回复）"
+                        value={draft}
+                        onChange={(e) =>
+                          handleReplyChange(msg.id, e.target.value)
+                        }
+                      />
+                      <div className="flex flex-wrap gap-3">
+                        <Button onClick={() => handleSaveReply(msg.id)}>
+                          追加回复
+                        </Button>
+                        <Button
+                          color="light"
+                          onClick={() => handleReplyChange(msg.id, "")}
+                        >
+                          清空
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                )
+              })}
+            </div>
+            {totalPages > 1 && (
+              <div className="flex justify-center">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                  showIcons
+                  previousLabel="上一页"
+                  nextLabel="下一页"
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
     </>

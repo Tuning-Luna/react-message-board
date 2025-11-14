@@ -1,47 +1,49 @@
-import { useState } from "react";
-import { Label, TextInput, Button, Card, Alert } from "flowbite-react";
+import { useState } from "react"
+import { Label, TextInput, Button, Card, Alert } from "flowbite-react"
+import { useMessages } from "../App"
 
 export default function NewMessage() {
-  const [nickname, setNickname] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const { addMessage } = useMessages()
+  const [nickname, setNickname] = useState("")
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [email, setEmail] = useState("")
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
   const validateForm = () => {
-    const newErrors: Record<string, string> = {};
+    const newErrors: Record<string, string> = {}
 
     if (!nickname.trim()) {
-      newErrors.nickname = "昵称不能为空";
+      newErrors.nickname = "昵称不能为空"
     }
 
     if (!title.trim()) {
-      newErrors.title = "标题不能为空";
+      newErrors.title = "标题不能为空"
     }
 
     if (!content.trim()) {
-      newErrors.content = "内容不能为空";
+      newErrors.content = "内容不能为空"
     }
 
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "请输入有效的邮箱地址";
+      newErrors.email = "请输入有效的邮箱地址"
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitSuccess(false);
+    e.preventDefault()
+    setSubmitSuccess(false)
 
     if (!validateForm()) {
-      return;
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       // TODO: 这里应该调用实际的 API
@@ -52,25 +54,38 @@ export default function NewMessage() {
       // });
 
       // 模拟 API 调用
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      // 添加新留言到 Context
+      const now = new Date()
+      const createdAt = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`
+
+      addMessage({
+        nickname,
+        title,
+        content,
+        email: email || undefined,
+        likes: 0,
+        createdAt,
+      })
 
       // 提交成功后重置表单
-      setNickname("");
-      setTitle("");
-      setContent("");
-      setEmail("");
-      setErrors({});
-      setSubmitSuccess(true);
+      setNickname("")
+      setTitle("")
+      setContent("")
+      setEmail("")
+      setErrors({})
+      setSubmitSuccess(true)
 
       // 3秒后隐藏成功提示
-      setTimeout(() => setSubmitSuccess(false), 3000);
+      setTimeout(() => setSubmitSuccess(false), 3000)
     } catch (error) {
-      console.error("提交失败:", error);
-      setErrors({ submit: "提交失败，请稍后重试" });
+      console.error("提交失败:", error)
+      setErrors({ submit: "提交失败，请稍后重试" })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <div className="mx-auto max-w-2xl space-y-6 p-4">
@@ -100,13 +115,13 @@ export default function NewMessage() {
               placeholder="请输入您的昵称"
               value={nickname}
               onChange={(e) => {
-                setNickname(e.target.value);
+                setNickname(e.target.value)
                 if (errors.nickname) {
                   setErrors((prev) => {
-                    const newErrors = { ...prev };
-                    delete newErrors.nickname;
-                    return newErrors;
-                  });
+                    const newErrors = { ...prev }
+                    delete newErrors.nickname
+                    return newErrors
+                  })
                 }
               }}
               color={errors.nickname ? "failure" : undefined}
@@ -129,13 +144,13 @@ export default function NewMessage() {
               placeholder="请输入留言标题"
               value={title}
               onChange={(e) => {
-                setTitle(e.target.value);
+                setTitle(e.target.value)
                 if (errors.title) {
                   setErrors((prev) => {
-                    const newErrors = { ...prev };
-                    delete newErrors.title;
-                    return newErrors;
-                  });
+                    const newErrors = { ...prev }
+                    delete newErrors.title
+                    return newErrors
+                  })
                 }
               }}
               color={errors.title ? "failure" : undefined}
@@ -159,13 +174,13 @@ export default function NewMessage() {
               placeholder="请输入留言内容"
               value={content}
               onChange={(e) => {
-                setContent(e.target.value);
+                setContent(e.target.value)
                 if (errors.content) {
                   setErrors((prev) => {
-                    const newErrors = { ...prev };
-                    delete newErrors.content;
-                    return newErrors;
-                  });
+                    const newErrors = { ...prev }
+                    delete newErrors.content
+                    return newErrors
+                  })
                 }
               }}
               className={`w-full rounded-lg border transition-all duration-300 ease-in-out ${
@@ -192,13 +207,13 @@ export default function NewMessage() {
               placeholder="请输入您的邮箱，回复时会收到邮件通知"
               value={email}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setEmail(e.target.value)
                 if (errors.email) {
                   setErrors((prev) => {
-                    const newErrors = { ...prev };
-                    delete newErrors.email;
-                    return newErrors;
-                  });
+                    const newErrors = { ...prev }
+                    delete newErrors.email
+                    return newErrors
+                  })
                 }
               }}
               color={errors.email ? "failure" : undefined}
@@ -220,5 +235,5 @@ export default function NewMessage() {
         </form>
       </Card>
     </div>
-  );
+  )
 }

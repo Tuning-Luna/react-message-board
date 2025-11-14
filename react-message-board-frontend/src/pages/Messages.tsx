@@ -7,98 +7,21 @@ import {
   Button,
   Card,
 } from "flowbite-react"
-
-interface Message {
-  id: number
-  title: string
-  content: string
-  nickname: string
-  time: string
-  likes: number
-  adminReply?: string
-}
-
-const mockMessages: Message[] = [
-  {
-    id: 1,
-    title: "你好！",
-    content: "这是第一条留言",
-    nickname: "Alice",
-    time: "2025-11-14 09:00",
-    likes: 10,
-    adminReply: "谢谢你的留言！",
-  },
-  {
-    id: 2,
-    title: "测试留言",
-    content: "这是第二条留言",
-    nickname: "Bob",
-    time: "2025-11-14 09:30",
-    likes: 5,
-  },
-  {
-    id: 3,
-    title: "测试留言",
-    content: "这是第三条留言",
-    nickname: "Charlie",
-    time: "2025-11-14 09:45",
-    likes: 3,
-  },
-  {
-    id: 4,
-    title: "测试留言",
-    content: "这是第四条留言",
-    nickname: "David",
-    time: "2025-11-14 10:00",
-    likes: 2,
-  },
-  {
-    id: 5,
-    title: "测试留言",
-    content: "这是第五条留言",
-    nickname: "Eve",
-    time: "2025-11-14 10:15",
-    likes: 1,
-  },
-  {
-    id: 6,
-    title: "测试留言",
-    content: "这是第六条留言",
-    nickname: "Frank",
-    time: "2025-11-14 10:30",
-    likes: 0,
-  },
-  {
-    id: 7,
-    title: "测试留言",
-    content: "这是第七条留言",
-    nickname: "Grace",
-    time: "2025-11-14 10:45",
-    likes: 0,
-  },
-  {
-    id: 8,
-    title: "测试留言",
-    content: "这是第八条留言",
-    nickname: "Hank",
-    time: "2025-11-14 11:00",
-    likes: 0,
-  },
-  // 可以再添加更多测试数据
-]
+import { useMessages } from "../App"
 
 export default function Messages() {
+  const { messages } = useMessages()
   const [keyword, setKeyword] = useState("")
   const [sort, setSort] = useState<"latest" | "popular">("latest")
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 5
 
   // 过滤 + 排序
-  const filteredMessages = mockMessages
+  const filteredMessages = messages
     .filter((m) => m.title.includes(keyword) || m.content.includes(keyword))
     .sort((a, b) => {
       if (sort === "latest")
-        return new Date(b.time).getTime() - new Date(a.time).getTime()
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       return b.likes - a.likes
     })
 
@@ -156,12 +79,19 @@ export default function Messages() {
               <p className="mt-2 text-gray-700">{msg.content}</p>
               <div className="mt-2 flex justify-between text-sm text-gray-500">
                 <span>by {msg.nickname}</span>
-                <span>{msg.time}</span>
+                <span>{msg.createdAt}</span>
               </div>
-              {msg.adminReply && (
-                <div className="mt-2 rounded border-l-4 border-blue-600 bg-gray-100 p-2">
-                  <span className="font-medium">管理员回复：</span>
-                  <span>{msg.adminReply}</span>
+              {msg.reply && msg.reply.length > 0 && (
+                <div className="mt-2 space-y-2">
+                  {msg.reply.map((replyText, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded border-l-4 border-blue-600 bg-gray-100 p-2"
+                    >
+                      <span className="font-medium">管理员回复：</span>
+                      <span>{replyText}</span>
+                    </div>
+                  ))}
                 </div>
               )}
             </Card>
@@ -171,11 +101,15 @@ export default function Messages() {
 
       {/* 分页器 */}
       {totalPages > 1 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+        <div className="flex justify-center">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+            previousLabel="上一页"
+            nextLabel="下一页"
+          />
+        </div>
       )}
     </div>
   )
