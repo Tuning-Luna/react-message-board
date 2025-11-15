@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { Label, TextInput, Button, Card, Alert } from "flowbite-react"
-import { useMessages } from "../App"
+import { useNavigate } from "react-router-dom"
+import { createMessage } from "../api/messages"
 
 export default function NewMessage() {
-  const { addMessage } = useMessages()
+  const navigate = useNavigate()
   const [nickname, setNickname] = useState("")
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
@@ -46,27 +47,12 @@ export default function NewMessage() {
     setIsSubmitting(true)
 
     try {
-      // TODO: 这里应该调用实际的 API
-      // const response = await fetch('/api/messages', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ nickname, title, content, email: email || undefined })
-      // });
-
-      // 模拟 API 调用
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // 添加新留言到 Context
-      const now = new Date()
-      const createdAt = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`
-
-      addMessage({
+      // 调用 API 发布留言
+      await createMessage({
         nickname,
         title,
         content,
         email: email || undefined,
-        likes: 0,
-        createdAt,
       })
 
       // 提交成功后重置表单
@@ -77,11 +63,15 @@ export default function NewMessage() {
       setErrors({})
       setSubmitSuccess(true)
 
-      // 3秒后隐藏成功提示
-      setTimeout(() => setSubmitSuccess(false), 3000)
+      // 3秒后隐藏成功提示，然后跳转到留言列表
+      setTimeout(() => {
+        setSubmitSuccess(false)
+        navigate("/")
+      }, 2000)
     } catch (error) {
       console.error("提交失败:", error)
-      setErrors({ submit: "提交失败，请稍后重试" })
+      // 错误提示已由拦截器处理，这里只设置表单错误
+      setErrors({ submit: "提交失败，请检查输入信息" })
     } finally {
       setIsSubmitting(false)
     }

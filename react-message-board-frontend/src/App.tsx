@@ -1,88 +1,17 @@
-import { useState, createContext, useContext } from "react"
+import { createContext, useContext } from "react"
 import { Outlet, Link, useLocation } from "react-router-dom"
 import { Navbar } from "flowbite-react"
-import type { Message } from "./types/messages"
 import { MessageIconFill } from "./svg/MessageIconFill"
 import { MessageIcon } from "./svg/MessageIcon"
 import { UserIconFill } from "./svg/UserIconFill"
 import { UserIcon } from "./svg/UserIcon"
 import { AddIcon } from "./svg/AddIcon"
 
-// 初始 mock 数据
-const initialMessages: Message[] = [
-  {
-    id: 1,
-    title: "你好！",
-    content: "这是第一条留言",
-    nickname: "Alice",
-    createdAt: "2025-11-14 09:00:00",
-    likes: 10,
-    reply: ["谢谢你的留言！"],
-  },
-  {
-    id: 2,
-    title: "测试留言",
-    content: "这是第二条留言",
-    nickname: "Bob",
-    createdAt: "2025-11-14 09:30:00",
-    likes: 5,
-  },
-  {
-    id: 3,
-    title: "测试留言",
-    content: "这是第三条留言",
-    nickname: "Charlie",
-    createdAt: "2025-11-14 09:45:00",
-    likes: 3,
-  },
-  {
-    id: 4,
-    title: "测试留言",
-    content: "这是第四条留言",
-    nickname: "David",
-    createdAt: "2025-11-14 10:00:00",
-    likes: 2,
-  },
-  {
-    id: 5,
-    title: "测试留言",
-    content: "这是第五条留言",
-    nickname: "Eve",
-    createdAt: "2025-11-14 10:15:00",
-    likes: 1,
-  },
-  {
-    id: 6,
-    title: "测试留言",
-    content: "这是第六条留言",
-    nickname: "Frank",
-    createdAt: "2025-11-14 10:30:00",
-    likes: 0,
-  },
-  {
-    id: 7,
-    title: "测试留言",
-    content: "这是第七条留言",
-    nickname: "Grace",
-    createdAt: "2025-11-14 10:45:00",
-    likes: 0,
-  },
-  {
-    id: 8,
-    title: "测试留言",
-    content: "这是第八条留言",
-    nickname: "Hank",
-    createdAt: "2025-11-14 11:00:00",
-    likes: 0,
-  },
-]
-
+// 保留 Context 以保持兼容性，但不再维护全局状态
+// 各个页面自己从 API 获取数据
 interface MessagesContextType {
-  messages: Message[]
-  addMessage: (message: Omit<Message, "id">) => void
-  deleteMessage: (id: number) => void
-  addReply: (id: number, reply: string) => void
-  likeMessage: (id: number) => void
+  // 这些方法已不再使用，保留仅为兼容性
+  refreshMessages?: () => void
 }
 
 const MessagesContext = createContext<MessagesContextType | undefined>(
@@ -91,60 +20,15 @@ const MessagesContext = createContext<MessagesContextType | undefined>(
 
 export const useMessages = () => {
   const context = useContext(MessagesContext)
-  if (!context) {
-    throw new Error("useMessages must be used within MessagesProvider")
-  }
+  // 不再强制要求 context，允许为 undefined
   return context
 }
 
 export default function App() {
   const { pathname } = useLocation()
-  const [messages, setMessages] = useState<Message[]>(initialMessages)
-
-  // 添加新留言
-  const addMessage = (messageData: Omit<Message, "id">) => {
-    const newId = Math.max(...messages.map((m) => m.id), 0) + 1
-    const newMessage: Message = {
-      ...messageData,
-      id: newId,
-    }
-    setMessages((prev) => [...prev, newMessage])
-  }
-
-  // 删除留言
-  const deleteMessage = (id: number) => {
-    setMessages((prev) => prev.filter((msg) => msg.id !== id))
-  }
-
-  // 添加回复
-  const addReply = (id: number, reply: string) => {
-    setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === id
-          ? {
-              ...msg,
-              reply: [...(msg.reply || []), reply],
-            }
-          : msg,
-      ),
-    )
-  }
-
-  // 点赞
-  const likeMessage = (id: number) => {
-    setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === id ? { ...msg, likes: msg.likes + 1 } : msg,
-      ),
-    )
-  }
 
   const contextValue: MessagesContextType = {
-    messages,
-    addMessage,
-    deleteMessage,
-    addReply,
-    likeMessage,
+    // 不再维护全局状态，各页面自己管理
   }
 
   return (

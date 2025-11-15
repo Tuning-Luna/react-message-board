@@ -76,10 +76,10 @@ router.get("/messages", (req, res) => {
   if (replied === "true") list = list.filter((m) => !!m.reply)
   if (replied === "false") list = list.filter((m) => !m.reply)
 
-  // 排序
-  if (sort === "oldest")
-    list.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt))
-  else list.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt))
+  // 排序，要么是最新，要么是最受欢迎（点赞数likes数最多）
+  if (sort === "newest")
+    list.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt))
+  else if (sort === "mostLiked") list.sort((a, b) => b.likes - a.likes)
 
   // 分页
   const p = parseInt(page as string)
@@ -111,7 +111,10 @@ router.post("/messages", (req, res) => {
     return res.send(error("邮箱格式不正确"))
 
   const db = readDB()
-  const now = new Date().toISOString().replace("T", " ").substring(0, 19)
+  const now = new Date()
+    .toLocaleString("zh-CN", { hour12: false })
+    .replace(/\//g, "-")
+
   const newMsg: Message = {
     id: Date.now(),
     nickname,

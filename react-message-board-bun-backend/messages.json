@@ -28,7 +28,7 @@
     "email": "charlie_dev@outlook.com",
     "content": "留言板的配色挺舒服，建议表单也保持统一风格。",
     "createdAt": "2025-11-13 04:37:35",
-    "likes": 1
+    "likes": 2
   },
   {
     "id": 1763008662924,
@@ -37,7 +37,7 @@
     "email": "george_ai@mail.com",
     "content": "希望能提供英文界面选项。",
     "createdAt": "2025-11-13 04:37:42",
-    "likes": 0
+    "likes": 5
   },
   {
     "id": 1763008667318,
@@ -46,6 +46,25 @@
     "email": "judy_user@icloud.com",
     "content": "字体稍显小，可以整体放大一点。",
     "createdAt": "2025-11-13 04:37:47",
-    "likes": 10
+    "likes": 11
+  },
+  {
+    "id": 1763177240368,
+    "nickname": "TuningLuna",
+    "title": "功能似乎已完成？`",
+    "content": "对，应该是",
+    "likes": 0,
+    "createdAt": "2025-11-15 03:27:20",
+    "reply": [
+      "是的"
+    ]
+  },
+  {
+    "id": 1763177594754,
+    "nickname": "Tuning",
+    "title": "1",
+    "content": "1",
+    "likes": 0,
+    "createdAt": "2025-11-15 03:33:14"
   }
 ]
