@@ -4,7 +4,7 @@
 
 ## 📋 项目简介
 
-这是一个功能完整的在线留言板系统，实现了课程设计《网上留言簿的设计与实现》的所有要求。系统采用前后端分离架构，前端使用 React + TypeScript 构建现代化用户界面，后端使用 Bun + Express 提供 RESTful API 服务。
+这是一个功能完整的在线留言板系统，实现了课程设计《网上留言簿的设计与实现》的所有要求。系统采用前后端分离架构，前端使用主流组合 `React` + `TypeScript` + `TailwindCSS` 构建现代化用户界面，后端使用 `Bun` + `Express` 提供 RESTful API 服务。
 
 ### 核心功能
 
@@ -94,21 +94,21 @@ react-message-board/
 #### 1. 克隆项目
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Tuning-Luna/react-message-board
 cd react-message-board
 ```
 
 #### 2. 安装后端依赖
 
 ```bash
-cd react-message-board-bun-backend
+cd ./react-message-board-bun-backend
 bun install
 ```
 
-#### 3. 安装前端依赖
+#### 3. 安装前端依赖（如果有 Bun 环境也可替换成 Bun 指令）
 
 ```bash
-cd ../react-message-board-frontend
+cd ./react-message-board-frontend
 npm install
 # 或
 yarn install
@@ -221,8 +221,7 @@ bun run start    # 生产模式
 
 详细的 API 接口文档请查看：
 
-- [react-message-board-bun-backend/API_DOC.md](./react-message-board-bun-backend/API_DOC.md)
-- [docs/API_DOC.md](./docs/API_DOC.md)
+[API_DOC.md](./docs/API_DOC.md)
 
 ## 📝 课程设计说明
 
@@ -257,7 +256,7 @@ bun run start    # 生产模式
 
 ### 修改后端 API 地址
 
-如果需要修改后端 API 地址，请编辑前端项目中的 `src/utils/request.ts` 文件：
+如果需要修改后端 API 地址，请编辑前端项目中的 [src/utils/request.ts](./react-message-board-frontend/src/utils/request.ts) 文件：
 
 ```typescript
 const request: AxiosInstance = axios.create({
@@ -269,7 +268,7 @@ const request: AxiosInstance = axios.create({
 
 ### 修改后端端口
 
-后端默认运行在 3000 端口，如需修改，请编辑 `react-message-board-bun-backend/index.ts` 文件。
+后端默认运行在 3000 端口，如需修改，请编辑 [react-message-board-bun-backend/index.ts](./react-message-board-bun-backend/index.ts) 文件。
 
 ## 📄 许可证
 
