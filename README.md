@@ -4,7 +4,7 @@
 
 ## 📋 项目简介
 
-这是一个功能完整的在线留言板系统，实现了课程设计《网上留言簿的设计与实现》的所有要求。系统采用前后端分离架构，前端使用主流组合 `React` + `TypeScript` + `TailwindCSS` 构建现代化用户界面，后端使用 `Bun` + `Express` 提供 RESTful API 服务。
+这是一个功能完整的在线留言板系统，实现了[课程设计《网上留言簿的设计与实现》](./docs/problem.md)的所有要求。系统采用前后端分离架构，前端使用主流组合 `React` + `TypeScript` + `TailwindCSS` 构建现代化用户界面，后端使用 `Bun` + `Express` 提供 RESTful API 服务。
 
 ### 核心功能
 
@@ -225,7 +225,7 @@ bun run start    # 生产模式
 
 ## 📝 课程设计说明
 
-本项目实现了《网上留言簿的设计与实现》课程设计的所有要求：
+本项目实现了[《网上留言簿的设计与实现》课程设计](./docs/problem.md)的所有要求：
 
 ### 设计要求
 
@@ -274,13 +274,9 @@ const request: AxiosInstance = axios.create({
 
 本项目采用 MIT 许可证，详见 [LICENSE](./LICENSE) 文件。
 
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
 ## 📚 相关文档
 
 - [前端详细文档](./react-message-board-frontend/README.md)
-- [后端详细文档](./react-message-board-bun-backend/README.md)
+- [Bun 后端详细文档](./react-message-board-bun-backend/README.md)
 - [API 接口文档](./docs/API_DOC.md)
 - [课程设计要求](./docs/problem.md)
