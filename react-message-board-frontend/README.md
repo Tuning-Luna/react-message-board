@@ -1,54 +1,210 @@
-# React + TypeScript + Vite
+# React 留言板系统
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个基于 React + TypeScript + Vite 构建的现代化留言板系统前端应用。
 
-Currently, two official plugins are available:
+## 📋 项目简介
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+这是一个功能完整的留言板系统前端项目，用户可以浏览留言、发布新留言、点赞留言，管理员可以登录后台进行留言管理和回复。界面简洁美观，交互流畅。
 
-## Expanding the ESLint configuration
+## ✨ 功能特性
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 用户功能
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+- 📝 **发布留言**：支持填写昵称、标题、内容和邮箱（选填）
+- 🔍 **搜索留言**：支持关键词搜索，可匹配内容、标题、昵称
+- 📊 **排序功能**：支持按最新时间或最受欢迎排序
+- 👍 **点赞功能**：为喜欢的留言点赞
+- 📄 **分页浏览**：支持分页查看留言列表
+
+### 管理员功能
+
+- 🔐 **管理员登录**：使用账号密码登录管理员后台
+- 💬 **回复留言**：管理员可以对留言进行回复（支持追加多条回复）
+- 🗑️ **删除留言**：管理员可以删除不当留言
+- 📧 **邮件通知**：当管理员回复留言时，如果用户提供了邮箱，会自动发送邮件通知
+
+## 🛠️ 技术栈
+
+- **框架**：React 19 + TypeScript
+- **构建工具**：Vite 7
+- **路由**：React Router 7
+- **UI 组件库**：Flowbite React
+- **样式**：Tailwind CSS 4
+- **HTTP 客户端**：Axios
+- **代码规范**：ESLint + Prettier
+
+## 📦 安装与运行
+
+### 环境要求
+
+- Node.js >= 18.0.0
+- npm 或 yarn 或 pnpm
+
+### 安装依赖
+
+```bash
+npm install
+# 或
+yarn install
+# 或
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 开发运行
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```bash
+npm run dev
+# 或
+yarn dev
+# 或
+pnpm dev
 ```
+
+启动后，应用会在浏览器中自动打开（默认地址：`http://localhost:5173`）
+
+### 构建生产版本
+
+```bash
+npm run build
+# 或
+yarn build
+# 或
+pnpm build
+```
+
+### 预览生产构建
+
+```bash
+npm run preview
+# 或
+yarn preview
+# 或
+pnpm preview
+```
+
+### 代码检查
+
+```bash
+npm run lint
+# 或
+yarn lint
+# 或
+pnpm lint
+```
+
+### 代码格式化
+
+```bash
+npm run format
+# 或
+yarn format
+# 或
+pnpm format
+```
+
+## ⚙️ 配置说明
+
+### API 配置
+
+项目默认连接的后端 API 地址为 `http://localhost:3000`，如需修改，请编辑 [src/utils/request.ts](./src/utils/request.ts)
+文件：
+
+```typescript
+const request: AxiosInstance = axios.create({
+  baseURL: "http://localhost:3000", // 修改为你的后端地址
+  timeout: 10000,
+  // ...
+})
+```
+
+### 管理员账号
+
+默认管理员账号：
+
+- 用户名：`admin`
+- 密码：`123456`
+
+> 注意：管理员账号由后端配置，如需修改请联系后端开发者。
+
+## 📁 项目结构
+
+```
+react-message-board-frontend/
+├── public/                 # 静态资源
+├── src/
+│   ├── api/               # API 接口定义
+│   │   ├── admin.ts       # 管理员相关接口
+│   │   └── messages.ts    # 留言相关接口
+│   ├── pages/             # 页面组件
+│   │   ├── Messages.tsx   # 留言广场页面
+│   │   ├── NewMessage.tsx # 发布留言页面
+│   │   └── Admin.tsx      # 管理员后台页面
+│   ├── router/            # 路由配置
+│   ├── svg/               # SVG 图标组件
+│   ├── types/             # TypeScript 类型定义
+│   ├── utils/             # 工具函数
+│   │   ├── request.ts     # Axios 请求封装
+│   │   └── errorToast.ts  # 错误提示工具
+│   ├── App.tsx            # 根组件
+│   └── main.tsx           # 入口文件
+├── index.html
+├── package.json
+├── vite.config.ts         # Vite 配置
+├── tsconfig.json          # TypeScript 配置
+└── README.md
+```
+
+## 🚀 使用说明
+
+### 1. 查看留言
+
+访问首页（留言广场），可以：
+
+- 浏览所有留言
+- 使用搜索框输入关键词搜索留言
+- 选择排序方式（最新 / 最受欢迎）
+- 点击点赞按钮为留言点赞
+- 使用分页器翻页查看
+
+### 2. 发布留言
+
+1. 点击导航栏的"我也要留言"
+2. 填写必填项：昵称、标题、内容
+3. （可选）填写邮箱，以便收到管理员回复通知
+4. 点击"发布留言"提交
+
+### 3. 管理员操作
+
+1. **登录**
+   - 点击导航栏的"管理员登录"
+   - 输入管理员账号和密码
+   - 登录成功后自动跳转到管理员后台
+
+2. **回复留言**
+   - 在管理员后台找到要回复的留言
+   - 在"管理员回复"文本框中输入回复内容
+   - 点击"追加回复"按钮
+   - 可以多次追加回复
+
+3. **删除留言**
+   - 在管理员后台找到要删除的留言
+   - 点击"删除"按钮
+   - 确认删除操作
+
+4. **退出登录**
+   - 点击右上角的"退出登录"按钮
+
+## 📝 注意事项
+
+1. **后端服务**：确保后端 API 服务已启动并运行在 `http://localhost:3000`
+2. **跨域问题**：如果前后端不在同一域名，需要后端配置 CORS
+3. **Token 存储**：管理员登录后的 token 会保存在浏览器的 localStorage 中
+4. **API 文档**：详细的 API 接口文档请查看 `API_DOC.md`
+
+## 📄 许可证
+
+本项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
