@@ -140,7 +140,7 @@ router.post("/messages/:id/like", (req, res) => {
 })
 
 // 5.管理员回复留言
-router.post("/messages/:id/reply", (req, res) => {
+router.post("/admin/messages/:id/reply", (req, res) => {
   const token = req.headers.authorization
   if (token !== ADMIN_TOKEN) return res.send(error("未登录或权限不足"))
 
@@ -160,7 +160,7 @@ router.post("/messages/:id/reply", (req, res) => {
 })
 
 // 6. 删除留言
-router.delete("/messages/:id", (req, res) => {
+router.delete("/admin/messages/:id", (req, res) => {
   const token = req.headers.authorization
   if (token !== ADMIN_TOKEN) return res.send(error("未登录或权限不足"))
 

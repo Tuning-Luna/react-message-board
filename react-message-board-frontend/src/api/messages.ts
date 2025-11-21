@@ -56,10 +56,10 @@ export const replyMessage = async (
   id: number,
   params: ReplyMessageParams,
 ): Promise<void> => {
-  return request.post(`/api/messages/${id}/reply`, params)
+  return request.post(`/api/admin/messages/${id}/reply`, params)
 }
 
 // 删除留言
 export const deleteMessage = async (id: number): Promise<void> => {
-  return request.delete(`/api/messages/${id}`)
+  return request.delete(`/api/admin/messages/${id}`)
 }
