@@ -13,5 +13,5 @@ export interface LoginResponse {
 export const adminLogin = async (
   params: LoginParams,
 ): Promise<LoginResponse> => {
-  return request.post("/api/admin/login", params)
+  return request.post("/admin/login", params)
 }

@@ -20,12 +20,12 @@ export interface GetMessagesParams {
 export const getMessages = async (
   params?: GetMessagesParams,
 ): Promise<MessagesListResponse> => {
-  return request.get("/api/messages", { params })
+  return request.get("/messages", { params })
 }
 
 // 获取留言详情
 export const getMessageById = async (id: number): Promise<Message> => {
-  return request.get(`/api/messages/${id}`)
+  return request.get(`/messages/${id}`)
 }
 
 // 发布留言
@@ -39,12 +39,12 @@ export interface CreateMessageParams {
 export const createMessage = async (
   params: CreateMessageParams,
 ): Promise<void> => {
-  return request.post("/api/messages", params)
+  return request.post("/messages", params)
 }
 
 // 点赞留言
 export const likeMessage = async (id: number): Promise<void> => {
-  return request.post(`/api/messages/${id}/like`)
+  return request.post(`/messages/${id}/like`)
 }
 
 // 管理员回复留言
@@ -56,10 +56,10 @@ export const replyMessage = async (
   id: number,
   params: ReplyMessageParams,
 ): Promise<void> => {
-  return request.post(`/api/admin/messages/${id}/reply`, params)
+  return request.post(`/admin/messages/${id}/reply`, params)
 }
 
 // 删除留言
 export const deleteMessage = async (id: number): Promise<void> => {
-  return request.delete(`/api/admin/messages/${id}`)
+  return request.delete(`/admin/messages/${id}`)
 }

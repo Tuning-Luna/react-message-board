@@ -14,7 +14,7 @@ interface ApiResponse<T = unknown> {
 
 // 创建 axios 实例
 const request: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "/api",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
