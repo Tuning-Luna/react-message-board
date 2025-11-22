@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: guestbook-gateway
+  profiles:
+    active: local
+  autoconfigure:
+    exclude:
+      - com.it.common.config.MyBatisPlusConfig
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.43.198:8849
+      config:
+        server-addr: 192.168.43.198:8849
+        file-extension: yaml
+        shared-configs:
+          - data-id: shared-log.yaml
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/messages/**
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/api/admin/**

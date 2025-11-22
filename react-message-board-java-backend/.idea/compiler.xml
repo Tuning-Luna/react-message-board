@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="guestbook-gateway" />
+        <module name="user-service" />
+        <module name="admin-service" />
+        <module name="guestbook-common" />
+      </profile>
+      <profile name="Annotation profile for GuestbookSystem" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../CodingAPP/apache-maven-3.9.11/repo/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="guestbook-api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="21">
+      <module name="content-service" target="21" />
+      <module name="guestbook-content" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="GuestbookSystem" options="" />
+      <module name="admin-service" options="-parameters" />
+      <module name="content-service" options="-parameters" />
+      <module name="guestbook-api" options="-parameters" />
+      <module name="guestbook-common" options="-parameters" />
+      <module name="guestbook-gateway" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

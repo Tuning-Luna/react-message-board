@@ -1,0 +1,4 @@
+gb:
+  db:
+    host: mysql-guestbook
+    pw: 123
