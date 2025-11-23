@@ -1,0 +1,37 @@
+gb:
+  db:
+    host: 192.168.43.198
+    # 修改为你自己的虚拟机IP地址
+    pw: 123 # 修改为docker中的MySQL密码
+    port: 3309
+    database: guestbook_system
+    un: root
+## 添加完整的数据源配置
+spring:
+  datasource:
+    # 使用一个正确格式的URL，移除重复配置
+    url: jdbc:mysql://${gb.db.host}:${gb.db.port}/${gb.db.database}?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${gb.db.un}
+    password: ${gb.db.pw}
+# 添加邮件配置
+  mail:
+    host: smtp.qq.com  # 以QQ邮箱为例，可根据实际使用的邮箱服务修改
+    username:  # 发件人邮箱
+    password: 
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+# 添加MyBatis-Plus配置
+mybatis-plus:
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+  global-config:
+    db-config:
+      update-strategy: not_null
+      id-type: auto

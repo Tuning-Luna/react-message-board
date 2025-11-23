@@ -1,0 +1,16 @@
+server:
+  port: 8082
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+feign:
+  okhttp:
+    enabled: true
+gb:
+  db:
+    database: guestbook_system
+  swagger:
+    title: "留言簿服务接口文档"
+    package: com.it.user.controller

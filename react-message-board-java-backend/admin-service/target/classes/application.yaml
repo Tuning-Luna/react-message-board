@@ -1,0 +1,25 @@
+server:
+  port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+feign:
+  okhttp:
+    enabled: true
+gb:
+  db:
+    database: guestbook_system
+  swagger:
+    title: "留言簿服务接口文档"
+    package: com.it.admin.controller
+  jwt:
+    location: classpath:hmall.jks
+    alias: hmall
+    password: hmall123
+    tokenTTL: 30m
+  auth:
+    excludePaths:
+      - /api/admin/messages/**
+      - /api/admin/login
