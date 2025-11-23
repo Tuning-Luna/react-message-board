@@ -4,7 +4,10 @@
 
 ## 📋 项目简介
 
-这是一个功能完整的在线留言板系统，实现了[课程设计《网上留言簿的设计与实现》](./docs/problem.md)的所有要求。系统采用前后端分离架构，前端使用主流组合 `React` + `TypeScript` + `TailwindCSS` 构建现代化用户界面，后端使用 `Bun` + `Express` 提供 RESTful API 服务。
+这是一个功能完整的在线留言板系统，实现了[课程设计《网上留言簿的设计与实现》](./docs/problem.md)的所有要求。系统采用前后端分离架构，前端使用主流组合 `React` + `TypeScript` + `TailwindCSS` 构建现代化用户界面。项目提供了两个后端实现方案：
+
+- **Bun 后端**：轻量级实现，使用 `Bun` + `Express` + `TypeScript`，数据存储在 JSON 文件中，适合快速开发和演示
+- **Java 后端**：企业级微服务架构，使用 `Spring Cloud` + `MySQL`，采用微服务架构设计，适合生产环境
 
 ### 核心功能
 
@@ -25,11 +28,27 @@
 
 ### 后端技术栈
 
+#### Bun 后端（轻量级方案）
+
 - **运行时**：Bun（快速的全栈 JavaScript 运行时）
 - **Web 框架**：Express 5
 - **开发语言**：TypeScript 5
 - **跨域支持**：CORS
 - **数据存储**：JSON 文件（轻量级，适合演示项目）
+
+#### Java 后端（微服务方案）
+
+- **核心框架**：Spring Boot 2.7.12 + Spring Cloud 2021.0.3
+- **微服务组件**：Spring Cloud Alibaba 2021.0.4.0
+- **服务注册与发现**：Nacos
+- **API 网关**：Spring Cloud Gateway
+- **服务间通信**：OpenFeign + LoadBalancer
+- **数据持久层**：MyBatis-Plus 3.5.3.1
+- **数据库**：MySQL 8.0
+- **安全认证**：JWT + Spring Security
+- **工具库**：Hutool 5.8.11 + Lombok
+- **开发语言**：Java 11
+- **构建工具**：Maven
 
 ## ✨ 功能特性
 
@@ -67,12 +86,21 @@ react-message-board/
 │   ├── vite.config.ts              # Vite 配置
 │   └── README.md                   # 前端详细文档
 │
-├── react-message-board-bun-backend/ # 后端项目
+├── react-message-board-bun-backend/ # Bun 后端项目（轻量级）
 │   ├── index.ts                    # 后端入口文件
 │   ├── messages.json               # 数据存储文件
 │   ├── package.json
 │   ├── API_DOC.md                  # API 接口文档
 │   └── README.md                   # 后端详细文档
+│
+├── react-message-board-java-backend/ # Java 后端项目（微服务）
+│   ├── guestbook-api/              # API 定义模块
+│   ├── admin-service/              # 管理员服务
+│   ├── user-service/               # 用户服务
+│   ├── guestbook-gateway/          # API 网关
+│   ├── guestbook-common/           # 通用模块
+│   ├── pom.xml                     # Maven 父项目配置
+│   └── README.md                   # Java 后端详细文档
 │
 ├── docs/                           # 项目文档
 │   ├── API_DOC.md                  # API 文档（汇总）
@@ -85,9 +113,21 @@ react-message-board/
 
 ### 环境要求
 
+#### 前端环境
+
 - **Node.js** >= 18.0.0
-- **Bun** >= 1.0.0（用于运行后端）
 - npm / yarn / pnpm（用于前端依赖管理）
+
+#### Bun 后端环境
+
+- **Bun** >= 1.0.0
+
+#### Java 后端环境
+
+- **JDK** 11+
+- **Maven** 3.6+
+- **MySQL** 5.7+ 或 8.0+
+- **Nacos** 2.0+（服务注册与发现、配置中心）
 
 ### 安装步骤
 
@@ -98,12 +138,23 @@ git clone https://github.com/Tuning-Luna/react-message-board
 cd react-message-board
 ```
 
-#### 2. 安装后端依赖
+#### 2. 选择后端方案并安装依赖
+
+**方案一：使用 Bun 后端（推荐用于快速开发）**
 
 ```bash
 cd ./react-message-board-bun-backend
 bun install
 ```
+
+**方案二：使用 Java 后端（推荐用于生产环境）**
+
+```bash
+cd ./react-message-board-java-backend
+mvn clean install
+```
+
+> **注意**：使用 Java 后端前，请确保已安装并启动 MySQL 和 Nacos 服务。详细配置请查看 [Java 后端文档](./react-message-board-java-backend/README.md)。
 
 #### 3. 安装前端依赖（如果有 Bun 环境也可替换成 Bun 指令）
 
@@ -120,12 +171,47 @@ pnpm install
 
 #### 启动后端服务
 
+**使用 Bun 后端：**
+
 ```bash
 cd react-message-board-bun-backend
 bun run dev
 ```
 
-后端服务将在 `http://localhost:3000` 启动。
+Bun 后端服务将在 `http://localhost:3000` 启动。
+
+**使用 Java 后端：**
+
+1. **启动 Nacos 服务**（如果尚未启动）
+
+   ```bash
+   # Windows
+   startup.cmd -m standalone
+   # Linux/Mac
+   sh startup.sh -m standalone
+   ```
+
+2. **启动各个微服务**（按顺序启动）
+
+   ```bash
+   cd react-message-board-java-backend
+
+   # 1. 启动用户服务
+   cd user-service
+   mvn spring-boot:run
+
+   # 2. 启动管理员服务（新终端）
+   cd admin-service
+   mvn spring-boot:run
+
+   # 3. 启动网关服务（新终端）
+   cd guestbook-gateway
+   mvn spring-boot:run
+   ```
+
+   Java 后端网关将在 `http://localhost:8080` 启动。
+
+> **提示**：Java 后端需要先配置数据库连接和 Nacos 连接信息，详细配置请查看 [Java 后端文档](./react-message-board-java-backend/README.md)。
 
 #### 启动前端应用
 
@@ -142,11 +228,25 @@ pnpm dev
 
 ### 默认配置
 
+#### Bun 后端配置
+
 - **后端 API 地址**：`http://localhost:3000`
-- **前端开发服务器**：`http://localhost:5173`
 - **管理员账号**：
   - 用户名：`admin`
   - 密码：`123456`
+
+#### Java 后端配置
+
+- **网关地址**：`http://localhost:8080`
+- **API 前缀**：`/api`
+- **管理员账号**：
+  - 用户名：`admin`
+  - 密码：`123456`
+
+#### 前端配置
+
+- **前端开发服务器**：`http://localhost:5173`
+- **API 地址配置**：根据使用的后端方案，修改 `react-message-board-frontend/src/utils/request.ts` 中的 `baseURL`
 
 ## 📖 使用说明
 
@@ -208,7 +308,9 @@ npm run format   # 代码格式化
 
 ### 后端开发
 
-详细的后端开发文档请查看：[react-message-board-bun-backend/README.md](./react-message-board-bun-backend/README.md)
+#### Bun 后端开发
+
+详细文档请查看：[react-message-board-bun-backend/README.md](./react-message-board-bun-backend/README.md)
 
 **常用命令**：
 
@@ -216,6 +318,35 @@ npm run format   # 代码格式化
 bun run dev      # 开发模式（自动重启）
 bun run start    # 生产模式
 ```
+
+#### Java 后端开发
+
+详细文档请查看：[react-message-board-java-backend/README.md](./react-message-board-java-backend/README.md)
+
+**常用命令**：
+
+```bash
+# 编译项目
+mvn clean compile
+
+# 运行单个服务
+cd user-service
+mvn spring-boot:run
+
+# 打包项目
+mvn clean package
+
+# 跳过测试打包
+mvn clean package -DskipTests
+```
+
+**模块说明**：
+
+- `guestbook-api`：API 定义模块，包含 Feign Client、DTO、VO 等
+- `user-service`：用户服务，处理留言的增删改查、点赞、搜索等
+- `admin-service`：管理员服务，处理管理员登录、回复留言、邮件通知等
+- `guestbook-gateway`：API 网关，处理路由转发、认证授权、跨域等
+- `guestbook-common`：通用模块，包含公共配置和依赖
 
 ### API 接口文档
 
@@ -256,11 +387,13 @@ bun run start    # 生产模式
 
 ### 修改后端 API 地址
 
-如果需要修改后端 API 地址，请编辑前端项目中的 [src/utils/request.ts](./react-message-board-frontend/src/utils/request.ts) 文件：
+前端需要根据使用的后端方案配置 API 地址，编辑 [src/utils/request.ts](./react-message-board-frontend/src/utils/request.ts) 文件：
 
 ```typescript
 const request: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000", // 修改为你的后端地址
+  baseURL: "http://localhost:3000", // Bun 后端地址
+  // 或
+  // baseURL: "http://localhost:8080/api", // Java 后端网关地址
   timeout: 10000,
   // ...
 })
@@ -268,7 +401,17 @@ const request: AxiosInstance = axios.create({
 
 ### 修改后端端口
 
-后端默认运行在 3000 端口，如需修改，请编辑 [react-message-board-bun-backend/index.ts](./react-message-board-bun-backend/index.ts) 文件。
+#### Bun 后端端口
+
+Bun 后端默认运行在 3000 端口，如需修改，请编辑 [react-message-board-bun-backend/index.ts](./react-message-board-bun-backend/index.ts) 文件。
+
+#### Java 后端端口
+
+Java 后端各服务的端口配置在各自的 `application.yaml` 文件中：
+
+- 网关服务：`react-message-board-java-backend/guestbook-gateway/src/main/resources/application.yaml`
+- 用户服务：`react-message-board-java-backend/user-service/src/main/resources/application.yaml`
+- 管理员服务：`react-message-board-java-backend/admin-service/src/main/resources/application.yaml`
 
 ## 📄 许可证
 
@@ -278,5 +421,25 @@ const request: AxiosInstance = axios.create({
 
 - [前端详细文档](./react-message-board-frontend/README.md)
 - [Bun 后端详细文档](./react-message-board-bun-backend/README.md)
+- [Java 后端详细文档](./react-message-board-java-backend/README.md)
 - [API 接口文档](./docs/API_DOC.md)
 - [课程设计要求](./docs/problem.md)
+
+## 🔄 后端方案选择
+
+本项目提供了两个后端实现方案，您可以根据需求选择合适的方案：
+
+| 特性         | Bun 后端       | Java 后端            |
+| ------------ | -------------- | -------------------- |
+| **架构**     | 单体应用       | 微服务架构           |
+| **数据存储** | JSON 文件      | MySQL 数据库         |
+| **启动速度** | 快速           | 需要启动多个服务     |
+| **适用场景** | 快速开发、演示 | 生产环境、企业级应用 |
+| **扩展性**   | 简单           | 高（微服务架构）     |
+| **学习成本** | 低             | 中高                 |
+| **依赖服务** | 无             | MySQL + Nacos        |
+
+**推荐选择**：
+
+- 如果您想快速体验项目功能，推荐使用 **Bun 后端**
+- 如果您需要部署到生产环境或学习微服务架构，推荐使用 **Java 后端**
