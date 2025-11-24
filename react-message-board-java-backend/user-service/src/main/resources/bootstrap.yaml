@@ -9,7 +9,6 @@ spring:
         server-addr: 192.168.43.198:8849
         namespace: public
         group: DEFAULT_GROUP
-        # 正确配置Nacos gRPC端口
         cluster-name: DEFAULT
       config:
         server-addr: 192.168.43.198:8849
@@ -18,21 +17,3 @@ spring:
           - data-id: shared-jdbc.yaml
           - data-id: shared-log.yaml
           - data-id: shared-swagger.yaml
-
-
-#spring:
-#  application:
-#    name: user-service
-#  profiles:
-#    active: local
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 192.168.43.198:8849
-#      config:
-#        server-addr: 192.168.43.198:8849
-#        file-extension: yaml
-#        shared-configs:
-#          - data-id: shared-jdbc.yaml
-#          - data-id: shared-log.yaml
-#          - data-id: shared-swagger.yaml
