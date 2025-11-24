@@ -226,6 +226,14 @@ pnpm dev
 
 前端应用将在 `http://localhost:5173` 启动，并自动在浏览器中打开。
 
+## 🤝 前后端联调与部署建议
+
+- **联调顺序**：先启动后端（Bun 或 Java），确保服务地址可用，再启动前端并确认 `baseURL` 指向正确的网关。
+- **环境切换**：可在前端创建 `.env.bun`、`.env.java` 等环境文件，通过 `VITE_API_BASE_URL` 变量控制请求地址（需在 `src/utils/request.ts` 中读取该变量），避免频繁手动修改代码。
+- **Bun 方案提示**：默认使用本地 JSON 文件存储数据，若需长期保存可将 `messages.json` 映射到持久化卷，或改写为连接 MongoDB/PostgreSQL。
+- **Java 方案提示**：需提前准备 MySQL 数据库与 Nacos 注册中心。数据库表结构可参照 `react-message-board-java-backend` 各服务的 `mapper` 与 `resources` 配置自行创建。
+- **部署建议**：Bun 方案适合单体部署或 Serverless；Java 方案推荐容器化部署（如 Docker/Kubernetes），各微服务独立伸缩，并由 `guestbook-gateway` 对外暴露统一入口。
+
 ### 默认配置
 
 #### Bun 后端配置
