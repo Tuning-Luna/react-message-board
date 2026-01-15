@@ -1,3 +1,5 @@
+更多合肥工业大学学习资料：https://github.com/Tuning-Luna/HFUT_XC_Study_Things
+
 # React 留言板系统
 
 一个基于现代 Web 技术栈构建的在线留言板系统，采用前后端分离架构，支持用户留言、管理员回复、邮件通知等功能。
