@@ -279,4 +279,4 @@ const request: AxiosInstance = axios.create({
 - [前端详细文档](./react-message-board-frontend/README.md)
 - [Bun 后端详细文档](./react-message-board-bun-backend/README.md)
 - [API 接口文档](./docs/API_DOC.md)
-- [课程设计要求](./docs/problem.md)
+- [课程设计要求](./docs/problem.md) 
