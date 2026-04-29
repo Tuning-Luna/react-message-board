@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bbc282b6-6981-4aba-b259-6c8ea4861066" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/AdminApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/config/AuthProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/config/JwtProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/config/MvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/interceptor/LoginInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/mapper/MasterMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/service/IMasterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/service/impl/MasterServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/it/admin/utils/JwtTool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/resources/application-dev.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/resources/application-local.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/resources/bootstrap.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin-service/src/main/resources/hmall.jks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/client/AdminMsgClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/config/DefaultFeignConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/config/JsonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/domain/dto/AdminLoginVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/domain/dto/AdminMsg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/domain/dto/Master.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/domain/dto/PageParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/domain/dto/UserMsg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/domain/vo/UserVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/exception/BadRequestException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/exception/BizIllegalException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/exception/CommonException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/exception/DbException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/exception/ForbiddenException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/exception/UnauthorizedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/interceptor/UserInfoInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/utils/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/utils/UserContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/vo_utils/PageResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/java/com/it/api/vo_utils/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-api/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-common/src/main/java/com/it/common/config/MyBatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/GatewayApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/config/AuthProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/config/JwtProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/filters/AuthGlobalFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/routers/DynamicRouteLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/java/gateway/util/JwtTool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/resources/bootstrap.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/guestbook-gateway/src/main/resources/hmall.jks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/UserApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/mapper/AdminMsgMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/mapper/UserMsgMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/service/IAdminMsgService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/service/IUserMsgService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/service/impl/AdminMsgServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/it/user/service/impl/UserMsgServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/application-dev.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/application-local.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/bootstrap.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="D:\CodingAPP\apache-maven-3.9.11" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+        <option name="userSettingsFile" value="D:\CodingAPP\apache-maven-3.9.11\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="21" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="35VBmkP8DVlxnrap4htXNhBqkXv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.GuestbookSystem [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.admin-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.guestbook-api [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.guestbook-api [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.guestbook-common [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.guestbook-gateway [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AdminApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ideaproject/GuestbookSystem/admin-service/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ideaproject\GuestbookSystem\admin-service\src\main\resources" />
+      <recent name="D:\ideaproject\GuestbookSystem\guestbook-api\src\main\resources" />
+      <recent name="D:\ideaproject\GuestbookSystem\admin-service\src\main\java\com\it\admin" />
+      <recent name="D:\ideaproject\GuestbookSystem\guestbook-api\src\main\java\com\it\api\exception" />
+      <recent name="D:\ideaproject\GuestbookSystem\guestbook-gateway\src\main\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.it.api.config" />
+      <recent name="com.it.api.utils" />
+      <recent name="com.it.api.exception" />
+      <recent name="com.it.admin" />
+      <recent name="com.it.user" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.UserApplication">
+    <configuration name="AdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" value="local" />
+      <module name="admin-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.it.admin.AdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" value="local" />
+      <module name="guestbook-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" value="local" />
+      <module name="user-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.it.user.UserApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="bbc282b6-6981-4aba-b259-6c8ea4861066" name="更改" comment="" />
+      <created>1763185520425</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763185520425</updated>
+      <workItem from="1763185521351" duration="7292000" />
+      <workItem from="1763270138940" duration="3915000" />
+      <workItem from="1763291070860" duration="7552000" />
+      <workItem from="1763348785730" duration="2013000" />
+      <workItem from="1763353871721" duration="11849000" />
+      <workItem from="1763392815536" duration="5197000" />
+      <workItem from="1763442221055" duration="5828000" />
+      <workItem from="1763473350330" duration="10320000" />
+      <workItem from="1763629605962" duration="2651000" />
+      <workItem from="1763635263213" duration="15208000" />
+      <workItem from="1763697924418" duration="7206000" />
+      <workItem from="1763706619021" duration="32080000" />
+      <workItem from="1763741011306" duration="1131000" />
+      <workItem from="1763742312790" duration="1869000" />
+      <workItem from="1763744606483" duration="3411000" />
+      <workItem from="1763779107165" duration="15399000" />
+      <workItem from="1763797383954" duration="4193000" />
+      <workItem from="1763803460159" duration="1725000" />
+      <workItem from="1763805551906" duration="622000" />
+      <workItem from="1763806428099" duration="122000" />
+      <workItem from="1763807182019" duration="55000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
